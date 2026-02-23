@@ -6,6 +6,11 @@ import json
 
 class Camera(models.Model):
     """Camera model for conveyor monitoring"""
+    SOURCE_TYPES = [
+        ('live', 'Live Camera'),
+        ('video_file', 'Video File'),
+    ]
+
     CAMERA_TYPES = [
         ('rtsp', 'RTSP IP Camera'),
         ('usb', 'USB Camera'),
@@ -17,15 +22,27 @@ class Camera(models.Model):
         ('inactive', 'Inactive'),
         ('maintenance', 'Maintenance'),
         ('error', 'Error'),
+        ('processing', 'Processing'),
+        ('completed', 'Completed'),
     ]
 
+    # Basic info
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=200, help_text="Location description")
+
+    # Source type
+    source_type = models.CharField(max_length=20, choices=SOURCE_TYPES, default='live')
     camera_type = models.CharField(max_length=20, choices=CAMERA_TYPES, default='rtsp')
+
+    # For live cameras
     rtsp_url = models.CharField(max_length=500, blank=True, help_text="RTSP URL for IP cameras")
     usb_device = models.CharField(max_length=100, blank=True, help_text="USB device path (e.g., /dev/video0)")
-    video_file = models.FileField(upload_to='videos/', blank=True, null=True)
 
+    # For video files
+    video_file = models.FileField(upload_to='videos/', null=True, blank=True)
+    duration = models.FloatField(null=True, blank=True, help_text="Duration in seconds (for video files)")
+
+    # Status
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='inactive')
     is_active = models.BooleanField(default=True)
 
@@ -44,18 +61,34 @@ class Camera(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"{self.name} - {self.location}"
+        if self.source_type == 'live':
+            return f"{self.name} - {self.get_camera_type_display()}"
+        else:
+            video_name = os.path.basename(self.video_file.name) if self.video_file else 'No file'
+            return f"{self.name} - Video: {video_name}"
 
-    def get_rtsp_url(self):
-        """Get RTSP URL with credentials if needed"""
-        # You can implement credential injection here
-        return self.rtsp_url
+    def get_source_info(self):
+        """Get source information based on type"""
+        if self.source_type == 'live':
+            if self.camera_type == 'rtsp':
+                return {'type': 'RTSP', 'url': self.rtsp_url}
+            elif self.camera_type == 'usb':
+                return {'type': 'USB', 'device': self.usb_device}
+        else:
+            if self.video_file:
+                return {
+                    'type': 'Video File',
+                    'filename': os.path.basename(self.video_file.name),
+                    'path': self.video_file.path
+                }
+        return {'type': 'Unknown'}
 
-    def is_online(self):
-        """Check if camera was online recently"""
-        if not self.last_checked:
-            return False
-        return (timezone.now() - self.last_checked).seconds < 300  # 5 minutes
+    def get_display_name(self):
+        """Get display name with source indicator"""
+        if self.source_type == 'live':
+            return f"📹 {self.name}"
+        else:
+            return f"🎬 {self.name}"
 
 
 class Detection(models.Model):
