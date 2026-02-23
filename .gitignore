@@ -1,0 +1,345 @@
+# Created by https://www.toptal.com/developers/gitignore/api/python,django,react,venv,dotenv,visualstudiocode,pycharm
+# Edit at https://www.toptal.com/developers/gitignore?templates=python,django,react,venv,dotenv,visualstudiocode,pycharm
+
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+static/
+*.egg-info/
+*.egg
+MANIFEST
+
+### Django: Static files ###
+collected_static/
+
+### Django: Media files ###
+/media/
+/uploads/
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# pdm
+.pdm.toml
+
+# PEP 582
+__pypackages__/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# pyright
+pyrightconfig.json
+
+### Python Patch ###
+*.pyc
+
+### React ###
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.pnp.debug
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# vercel
+.vercel
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+
+### venv ###
+# Virtualenv
+# https://virtualenv.pypa.io/
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+pip-selfcheck.json
+
+### dotenv ###
+.env
+.env.test
+.env.production
+.env.local
+.env.*.local
+
+### PyCharm ###
+.idea/
+*.iws
+/out/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# PyCharm Patch #
+.idea/**/gradle.xml
+.idea/**/libraries
+
+### PyCharm Patch ###
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+
+# sensative / high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+# Mongo Explorer plugin
+.idea/**/mongoSettings.xml
+
+# End of https://www.toptal.com/developers/gitignore/api/python,django,react,venv,dotenv,visualstudiocode,pycharm
+
+# Custom additions for conveyor monitoring project
+
+# Docker
+*.pid
+docker-compose.override.yml
+.DS_Store
+
+# Backend specific
+backend/.env
+backend/*.db
+backend/*.sqlite3
+backend/staticfiles/
+backend/media/
+backend/__pycache__/
+backend/*/__pycache__/
+backend/*/migrations/*.py
+!backend/*/migrations/__init__.py
+
+# Frontend specific
+frontend/.env
+frontend/.env.*
+frontend/build/
+frontend/node_modules/
+frontend/__pycache__/  # In case any Python files end up here
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Secrets
+*.pem
+*.key
+*.crt
+*.p12
+secrets/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Database exports
+*.sql
+*.dump
+*.backup
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# Sphinx docs
+docs/_build/
+
+# Project specific
+/data/
+/temp/
+/uploads/
+/downloads/
+/cache/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Docker environment
+.docker-env
+*.env.docker
+
+# SSL certificates (for local dev)
+*.crt
+*.key
+*.pem
+/nginx/ssl/
+
+# Test reports
+test-reports/
+reports/

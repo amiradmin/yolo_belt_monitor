@@ -1,0 +1,14 @@
+# yolo-service/.dockerignore
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+.git
+.gitignore
+../README.md
+Dockerfile
+.dockerignore
